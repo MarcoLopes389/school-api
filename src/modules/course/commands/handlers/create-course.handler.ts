@@ -1,3 +1,4 @@
+import { CreateCourseValidator } from './../../validators/create-course.validator';
 import { ICourseRepo } from './../../interfaces/course.repo.interface';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateCourseCommand } from './../impl/create-course.command';
@@ -12,7 +13,7 @@ export class CreateCourseHandler
     private readonly repository: ICourseRepo,
   ) {}
   async execute(command: CreateCourseCommand): Promise<void> {
-    console.log('Async command create');
+    CreateCourseValidator.validate(command.body);
     await this.repository.create(command.body);
   }
 }

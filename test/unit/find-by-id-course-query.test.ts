@@ -1,9 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { CreateCourseCommand } from './../../src/modules/course/commands/impl/create-course.command';
-import { CreateCourseHandler } from './../../src/modules/course/commands/handlers/create-course.handler';
-import { GetCourseHandler } from './../../src/modules/course/queries/handlers/get-course.handler';
-import { resultById } from './../__mocks__/repo/course-result.repo';
+import { GetCourseHandler } from '../../src/modules/course/queries/handlers/get-course.handler';
+import { resultById } from '../__mocks__/repo/course-result.repo';
 import { CourseRepoMock } from '../__mocks__/repo/course.repo.mock';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
@@ -22,13 +20,10 @@ describe('Find by id user query tests', () => {
           useClass: CourseRepoMock,
         },
         GetCourseHandler,
-        CreateCourseHandler,
       ],
     }).compile();
 
     sut = test.get(GetCourseHandler);
-    const command = test.get(CreateCourseHandler);
-    await command.execute(new CreateCourseCommand(resultById));
   });
 
   test('should be defined', () => {

@@ -1,8 +1,9 @@
 import { randomUUID } from 'crypto';
 import { Course } from '../../../src/modules/course/models/course.entity';
 export const resultById: Course = {
-  description: 'This is a tes course',
+  description:
+    'this text have 100 characters, but its completly useless, I can write all the time, but I dont want!',
   duration: '1 hour',
-  name: 'Test Course',
+  name: 'Test course',
   id: randomUUID(),
 };
