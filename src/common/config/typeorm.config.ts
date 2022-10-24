@@ -1,3 +1,4 @@
+import { Course } from './../../modules/course/models/course.entity';
 import { ConfigModule } from '@nestjs/config';
 import {
   TypeOrmModuleAsyncOptions,
@@ -11,7 +12,7 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
       return {
         type: 'sqlite',
         database: 'db.sqlite',
-        entities: [],
+        entities: [Course],
         migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
         migrationsRun: true,
         migrationsTableName: 'migrations_history',
