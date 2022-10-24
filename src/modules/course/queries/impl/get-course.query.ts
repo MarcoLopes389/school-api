@@ -1,7 +1,7 @@
 export class GetCourseQuery {
-  body: object;
+  id: string;
 
-  constructor(body: object) {
-    this.body = body;
+  constructor(id: string) {
+    this.id = id;
   }
 }
