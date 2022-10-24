@@ -1,7 +1,7 @@
 import { ICourseRepo } from './../../interfaces/course.repo.interface';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetCourseQuery } from '../impl/get-course.query';
-import { Inject } from '@nestjs/common';
+import { BadRequestException, Inject } from '@nestjs/common';
 import { Course } from '../../models/course.entity';
 
 @QueryHandler(GetCourseQuery)
@@ -12,6 +12,10 @@ export class GetCourseHandler implements IQueryHandler<GetCourseQuery> {
   ) {}
 
   async execute(query: GetCourseQuery): Promise<Course> {
+    if (!query.id) {
+      throw new BadRequestException();
+    }
+
     return await this.repository.getById(query.id);
   }
 }

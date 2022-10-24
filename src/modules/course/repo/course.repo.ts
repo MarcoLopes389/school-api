@@ -14,10 +14,6 @@ export class CourseRepo implements ICourseRepo {
   }
 
   async getById(id: string): Promise<Course> {
-    return await this.repo.findOne({
-      where: {
-        id,
-      },
-    });
+    return await this.repo.findOneBy({ id });
   }
 }

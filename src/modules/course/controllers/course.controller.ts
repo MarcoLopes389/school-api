@@ -28,7 +28,7 @@ export class CourseController {
     return await this.queryBus.execute(new GetCourseQuery(id));
   }
 
-  @Post()
+  @Put()
   @HttpCode(201)
   async createCourse(@Body() course: CreateCourseDTO): Promise<void> {
     await this.commandBus.execute(new CreateCourseCommand(course));
