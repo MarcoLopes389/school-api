@@ -8,17 +8,18 @@ import {
 export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
-    if (process.env.NODE_ENV == 'development') {
-      return {
-        type: 'sqlite',
-        database: 'db.sqlite',
-        entities: [Course],
-        migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
-        migrationsRun: true,
-        migrationsTableName: 'migrations_history',
-        synchronize: true,
-        logging: true,
-      };
+    if (process.env.NODE_ENV == 'production') {
+      return;
     }
+    return {
+      type: 'sqlite',
+      database: 'db.sqlite',
+      entities: [Course],
+      migrations: [__dirname + '/../../migrations/*{.ts,.js}'],
+      migrationsRun: true,
+      migrationsTableName: 'migrations_history',
+      synchronize: true,
+      logging: true,
+    };
   },
 };

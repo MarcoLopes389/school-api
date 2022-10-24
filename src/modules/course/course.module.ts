@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { Course } from './models/course.entity';
 import { QueryHandlers } from './queries/handlers';
+import { CommandHandlers } from './commands/handlers';
 
 @Module({
   imports: [CqrsModule, TypeOrmModule.forFeature([Course])],
@@ -14,6 +15,7 @@ import { QueryHandlers } from './queries/handlers';
       useClass: CourseRepo,
     },
     ...QueryHandlers,
+    ...CommandHandlers,
   ],
   controllers: [CourseController],
   exports: [TypeOrmModule],

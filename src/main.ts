@@ -7,6 +7,8 @@ import { ErrorInterceptor } from './common/interceptors/error.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.useGlobalInterceptors(new ErrorInterceptor());
+  app.disable('x-powered-by');
+  app.enableCors();
 
   const config = new DocumentBuilder().setTitle('School').build();
   const document = SwaggerModule.createDocument(app, config);
