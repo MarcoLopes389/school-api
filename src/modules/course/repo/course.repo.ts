@@ -9,11 +9,19 @@ export class CourseRepo implements ICourseRepo {
     private repo: Repository<Course>,
   ) {}
 
+  async delete(id: string): Promise<void> {
+    await this.repo.delete({ id });
+  }
+
   async create(course: CreateCourseDTO): Promise<void> {
     await this.repo.insert(course);
   }
 
   async getById(id: string): Promise<Course> {
     return await this.repo.findOneBy({ id });
+  }
+
+  async getAll(): Promise<Course[]> {
+    return await this.repo.find();
   }
 }

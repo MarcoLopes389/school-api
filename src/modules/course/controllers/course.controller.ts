@@ -1,6 +1,6 @@
 import { CreateCourseDTO } from './../models/create-course.dto';
 import { CreateCourseCommand } from './../commands/impl/create-course.command';
-import { GetCourseQuery } from './../queries/impl/get-course.query';
+import { GetCourseByIdQuery } from '../queries/impl/get-course-by-id.query';
 import {
   Body,
   Controller,
@@ -25,7 +25,7 @@ export class CourseController {
   @Get()
   @HttpCode(200)
   async getCourse(@Param('id') id: string): Promise<Course> {
-    return await this.queryBus.execute(new GetCourseQuery(id));
+    return await this.queryBus.execute(new GetCourseByIdQuery(id));
   }
 
   @Put()

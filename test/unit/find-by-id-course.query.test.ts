@@ -1,13 +1,13 @@
 import { BadRequestException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
-import { GetCourseHandler } from '../../src/modules/course/queries/handlers/get-course.handler';
-import { resultById } from '../__mocks__/repo/course-result.repo';
+import { GetCourseByIdHandler } from '../../src/modules/course/queries/handlers/get-course-by-id.handler';
+import { courseResults } from '../__mocks__/repo/course-result.repo';
 import { CourseRepoMock } from '../__mocks__/repo/course.repo.mock';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
-import { GetCourseQuery } from '../../src/modules/course/queries/impl/get-course.query';
+import { GetCourseByIdQuery } from '../../src/modules/course/queries/impl/get-course-by-id.query';
 
-let sut: GetCourseHandler;
+let sut: GetCourseByIdHandler;
 const id = randomUUID();
 
 describe('Find by id user query tests', () => {
@@ -19,11 +19,11 @@ describe('Find by id user query tests', () => {
           provide: 'ICourseRepo',
           useClass: CourseRepoMock,
         },
-        GetCourseHandler,
+        GetCourseByIdHandler,
       ],
     }).compile();
 
-    sut = test.get(GetCourseHandler);
+    sut = test.get(GetCourseByIdHandler);
   });
 
   test('should be defined', () => {
@@ -31,19 +31,21 @@ describe('Find by id user query tests', () => {
   });
 
   test('should return the user', async () => {
-    const result = await sut.execute(new GetCourseQuery(resultById.id));
+    const result = await sut.execute(
+      new GetCourseByIdQuery(courseResults[0].id),
+    );
     expect(result).toBeDefined();
-    expect(result).toBe(resultById);
+    expect(result).toBe(courseResults[0]);
   });
   test('should throw error if id is not especified', async () => {
     try {
-      await sut.execute(new GetCourseQuery(undefined));
+      await sut.execute(new GetCourseByIdQuery(undefined));
     } catch (error) {
       expect(error).toBeInstanceOf(BadRequestException);
     }
   });
   test('should return null if not exist registers', async () => {
-    const result = await sut.execute(new GetCourseQuery('sjdcjsbdcb'));
+    const result = await sut.execute(new GetCourseByIdQuery('sjdcjsbdcb'));
 
     expect(result).toBeUndefined();
   });
