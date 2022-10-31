@@ -3,11 +3,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Course } from '../models/course.entity';
 import { ICourseRepo } from './../interfaces/course.repo.interface';
+import { WithRequiredProperty } from 'src/common/utils/with-required-property.type';
 export class CourseRepo implements ICourseRepo {
   constructor(
     @InjectRepository(Course)
     private repo: Repository<Course>,
   ) {}
+
+  async update(
+    course: WithRequiredProperty<Partial<Course>, 'id'>,
+  ): Promise<void> {
+    await this.repo.update({ id: course.id }, course);
+  }
 
   async delete(id: string): Promise<void> {
     await this.repo.delete({ id });

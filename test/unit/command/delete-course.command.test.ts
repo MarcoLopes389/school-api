@@ -1,10 +1,10 @@
-import { UndefinedPropertyError } from '../../src/common/errors/undefined-property.error';
-import { NotFoundError } from '../../src/common/errors/not-found.error';
-import { DeleteCourseBydIdHandler } from '../../src/modules/course/commands/handlers/delete-course-by-id.handler';
+import { UndefinedPropertyError } from '../../../src/common/errors/undefined-property.error';
+import { NotFoundError } from '../../../src/common/errors/not-found.error';
+import { DeleteCourseBydIdHandler } from '../../../src/modules/course/commands/handlers/delete-course-by-id.handler';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
-import { CourseRepoMock } from '../__mocks__/repo/course.repo.mock';
-import { DeleteCourseByIdCommand } from '../../src/modules/course/commands/impl/delete-course-by-id.command';
+import { CourseRepoMock } from '../../__mocks__/repo/course.repo.mock';
+import { DeleteCourseByIdCommand } from '../../../src/modules/course/commands/impl/delete-course-by-id.command';
 
 let sut: DeleteCourseBydIdHandler;
 

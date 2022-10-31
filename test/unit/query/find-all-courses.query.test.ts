@@ -1,6 +1,6 @@
-import { GetAllCoursesHandler } from '../../src/modules/course/queries/handlers/get-all-courses.handler';
+import { GetAllCoursesHandler } from '../../../src/modules/course/queries/handlers/get-all-courses.handler';
 import { CqrsModule } from '@nestjs/cqrs';
-import { CourseRepoMock } from '../__mocks__/repo/course.repo.mock';
+import { CourseRepoMock } from '../../__mocks__/repo/course.repo.mock';
 import { Test } from '@nestjs/testing';
 
 let sut: GetAllCoursesHandler;

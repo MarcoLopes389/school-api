@@ -1,9 +1,9 @@
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
-import { ValidationError } from '../../src/common/errors/validation.error';
-import { CreateCourseCommand } from '../../src/modules/course/commands/impl/create-course.command';
-import { CourseRepoMock } from '../__mocks__/repo/course.repo.mock';
-import { CreateCourseHandler } from '../../src/modules/course/commands/handlers/create-course.handler';
+import { ValidationError } from '../../../src/common/errors/validation.error';
+import { CreateCourseCommand } from '../../../src/modules/course/commands/impl/create-course.command';
+import { CourseRepoMock } from '../../__mocks__/repo/course.repo.mock';
+import { CreateCourseHandler } from '../../../src/modules/course/commands/handlers/create-course.handler';
 let sut: CreateCourseHandler;
 
 describe('Create user query tests', () => {

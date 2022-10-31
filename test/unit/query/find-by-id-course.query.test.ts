@@ -1,14 +1,12 @@
-import { BadRequestException } from '@nestjs/common';
-import { randomUUID } from 'crypto';
-import { GetCourseByIdHandler } from '../../src/modules/course/queries/handlers/get-course-by-id.handler';
-import { courseResults } from '../__mocks__/repo/course-result.repo';
-import { CourseRepoMock } from '../__mocks__/repo/course.repo.mock';
+import { UndefinedPropertyError } from '../../../src/common/errors/undefined-property.error';
+import { GetCourseByIdHandler } from '../../../src/modules/course/queries/handlers/get-course-by-id.handler';
+import { courseResults } from '../../__mocks__/repo/course-result.repo';
+import { CourseRepoMock } from '../../__mocks__/repo/course.repo.mock';
 import { CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
-import { GetCourseByIdQuery } from '../../src/modules/course/queries/impl/get-course-by-id.query';
+import { GetCourseByIdQuery } from '../../../src/modules/course/queries/impl/get-course-by-id.query';
 
 let sut: GetCourseByIdHandler;
-const id = randomUUID();
 
 describe('Find by id user query tests', () => {
   beforeAll(async () => {
@@ -41,7 +39,7 @@ describe('Find by id user query tests', () => {
     try {
       await sut.execute(new GetCourseByIdQuery(undefined));
     } catch (error) {
-      expect(error).toBeInstanceOf(BadRequestException);
+      expect(error).toBeInstanceOf(UndefinedPropertyError);
     }
   });
   test('should return null if not exist registers', async () => {
